@@ -64,10 +64,10 @@ const InventoryScreen = () => {
                 />
                 <View style={styles.sortButtonsContainer}>
                     <TouchableOpacity onPress={() => setSortOrder('asc')}>
-                        <Text>Sort Ascending</Text>
+                        <Text style={styles.headerTextLeft}>Sort Ascending</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => setSortOrder('desc')}>
-                        <Text>Sort Descending</Text>
+                          <Text style={styles.headerTextRight}>Sort Descending</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -99,11 +99,25 @@ const InventoryScreen = () => {
                 </Modal>
             )}
             <View style={styles.footer}>
-                <Text style={styles.inactiveMessage}>You're currently inactive, start a skill</Text>
-                <View style={styles.navBar}>
-                    {/* Icon Buttons */}
-                </View>
-            </View>
+          <Text style={styles.inactiveMessage}>You're currently inactive, start a skill</Text>
+          </View>
+          <View style={styles.navBar}>
+            <TouchableOpacity style={styles.navItem}>
+              <FontAwesome name="home" size={24} color="#fff" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.navItem}>
+              <MaterialIcons name="backpack" size={24} color="grey" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.navItem}>
+              <FontAwesome name="shopping-cart" size={24} color="grey" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.navItem}>
+              <MaterialIcons name="list-alt" size={24} color="grey" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.navItem}>
+              <MaterialIcons name="more-horiz" size={24} color="grey" />
+            </TouchableOpacity>
+          </View>
         </SafeAreaView>
     );
 };
@@ -114,19 +128,38 @@ const styles = StyleSheet.create({
     backgroundColor: '#373737',
   },
   header: {
-    height: 75,
+    height: 70,
     backgroundColor: '#373737',
     alignItems: 'center',
     justifyContent: 'center',
+    color:'#fff',
+    marginTop: 6,
+    borderBottomWidth: 1,
+    borderColor: '#262626',
+    paddingTop: 20,
+    paddingBottom: 0,
   },
   headerTitle: {
     color: '#fff',
     fontSize: 20,
     fontWeight: 'bold',
   },
+  headerTextLeft: {
+    color: 'white',
+    marginLeft: 'auto',
+    position: 'relative',
+    bottom: 28,
+    right: 90,
+  },
+  headerTextRight: {
+    color: 'white',
+    marginLeft: 'auto',
+    position: 'relative',
+    bottom: 28,
+    left: 90,
+  },
   itemContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     padding: 20,
     borderBottomWidth: 1,
     borderBottomColor: 'grey',
@@ -220,7 +253,7 @@ const styles = StyleSheet.create({
   footer: {
     padding: 'none',
     backgroundColor: '#373737',
-
+    marginBottom: 15,
   },
   inactiveMessage: {
     color: '#fff',
@@ -245,8 +278,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 20,
     borderBottomWidth: 1,
-    borderBottomColor: 'grey',
-    color: "#fff",
+    borderBottomColor: '#575757',
 },
 itemName: {
     fontSize: 18,
@@ -288,12 +320,14 @@ Celestial: {
     color: 'cyan', // Hint towards celestial - cyan or light blue
 },
 searchBar: {
-  backgroundColor: '#232323',
+  backgroundColor: '#fff',
   paddingHorizontal: 1,
   marginVertical: 10,
   borderRadius: 10,
   height: 20, // Adjust based on your design
+  width: '35%',
   fontSize: 16,
+  color:'#777777',
 },
 sortButtonsContainer: {
   flexDirection: 'row',
@@ -301,6 +335,7 @@ sortButtonsContainer: {
   padding: 0,
   marginBottom: 15,
   letterSpacing: 20,
+  color:'#fff',
 },
 }
 );
