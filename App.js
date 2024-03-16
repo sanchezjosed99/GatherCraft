@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Modal, Image, StatusBar, SafeAreaView, FlatList } from 'react-native';
-import { FontAwesome, MaterialIcons } from '@expo/vector-icons'; // Ensure you have expo/vector-icons installed
-import InventoryScreen from './src/components/Inventory';
-import HomeScreen from './src/components/HomeScreen'
-
+import React from 'react';
+import AppNavigator from "./src/navigation/AppNavigator";
+import { ThemeProvider } from "react-native-rapi-ui";
 export default function App() {
   return (
-    <InventoryScreen/>
+    <ThemeProvider>
+      <AppNavigator />
+    </ThemeProvider>
   );
 }

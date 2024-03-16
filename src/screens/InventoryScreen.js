@@ -4,52 +4,21 @@ import {
   Image, StatusBar, SafeAreaView, FlatList, TextInput
 } from 'react-native';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
-import { gameItems, weapons, armors, consumables } from './gameItems';
-import itemImages from './itemMapping';  // Ensure this correctly maps item names to image paths
+import gameItems from '../components/gameItems'; // Ensure this component is correctly imported
 
-const InventoryScreen = () => {
+function InventoryScreen() {
     const [selectedItem, setSelectedItem] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
     const [sortOrder, setSortOrder] = useState('asc');
+    const [userAcquiredItems, setUserAcquiredItems] = useState([]); // This should be populated based on your game logic
 
-    const convertItemsToInventoryFormat = () => {
-        let idCounter = 1;
-        const convertSection = (items) => {
-            return Object.values(items).flat().map(item => ({
-                id: String(idCounter++),
-                name: item.name,
-                quantity: '10',  // Assuming you are assigning default values for demo
-                price: '1',  // Assuming default values for demo
-                rarity: item.rarity,
-                description: item.description || '',  // Provide default empty string if none
-                level: item.level || 1,  // Provide default level if none
-                image: itemImages[item.name],  // Fetch corresponding image from itemImages
-            }));
-        };
-
-        return [
-          ...convertSection(gameItems),
-          ...convertSection(weapons),
-          ...convertSection(armors),
-          ...convertSection(consumables)
-        ];
-    };
-
-    const inventoryItems = convertItemsToInventoryFormat();
-
-    const filteredAndSortedItems = inventoryItems
-        .filter(item => item.name.toString().toLowerCase().includes(searchTerm.toLowerCase()))
-        .sort((a, b) => sortOrder === 'asc' ? a.name.toString().localeCompare(b.name) : b.name.toString().localeCompare(a.name));
+    // Assuming you update userAcquiredItems somewhere in your game logic
+    const filteredAndSortedItems = userAcquiredItems
+        .filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()))
+        .sort((a, b) => sortOrder === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
 
     const renderItem = ({ item }) => (
-        <TouchableOpacity style={styles.itemContainer} onPress={() => setSelectedItem(item)}>
-            <Image source={item.image} style={styles.itemImage} />
-            <View style={styles.itemDetails}>
-                <Text style={[styles.itemName, styles[item.rarity]]}>{item.name}</Text>
-                <Text style={styles.itemQuantity}>{item.quantity}</Text>
-            </View>
-            <Text style={styles.itemPrice}>{item.price} Gold</Text>
-        </TouchableOpacity>
+        <InventoryItem item={item} onPress={() => setSelectedItem(item)} />
     );
 
     return (
@@ -67,7 +36,7 @@ const InventoryScreen = () => {
                         <Text style={styles.headerTextLeft}>Sort Ascending</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => setSortOrder('desc')}>
-                          <Text style={styles.headerTextRight}>Sort Descending</Text>
+                        <Text style={styles.headerTextRight}>Sort Descending</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -75,7 +44,7 @@ const InventoryScreen = () => {
             <FlatList
                 data={filteredAndSortedItems}
                 renderItem={renderItem}
-                keyExtractor={item => item.id}
+                keyExtractor={item => item.id.toString()}
             />
             {selectedItem && (
                 <Modal
@@ -99,25 +68,12 @@ const InventoryScreen = () => {
                 </Modal>
             )}
             <View style={styles.footer}>
-          <Text style={styles.inactiveMessage}>You're currently inactive, start a skill</Text>
-          </View>
-          <View style={styles.navBar}>
-            <TouchableOpacity style={styles.navItem}>
-              <FontAwesome name="home" size={24} color="#fff" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.navItem}>
-              <MaterialIcons name="backpack" size={24} color="grey" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.navItem}>
-              <FontAwesome name="shopping-cart" size={24} color="grey" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.navItem}>
-              <MaterialIcons name="list-alt" size={24} color="grey" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.navItem}>
-              <MaterialIcons name="more-horiz" size={24} color="grey" />
-            </TouchableOpacity>
-          </View>
+                <Text style={styles.footerText}>Currently Inactive</Text>
+                <View style={styles.footerRow}>
+                    <Text style={styles.footerText}>Inventory: 59/120</Text>
+                    <Text style={styles.footerText}>Gold: 164</Text>
+                </View>
+            </View>
         </SafeAreaView>
     );
 };
@@ -251,27 +207,26 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   footer: {
-    padding: 'none',
-    backgroundColor: '#373737',
-    marginBottom: 15,
+    backgroundColor: '#303030',
+    padding: 10,
+    borderTopWidth: 0.5,
+    borderColor: '#000',
+    alignItems: 'center', // Center align items
+    justifyContent: 'center', // Center items vertically
+    position: 'absolute', // Make sure it's at the bottom
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
-  inactiveMessage: {
+  footerText: {
     color: '#fff',
-    justifyContent: 'space-around',
-    textAlign: "center",
-    margin: 15,
-    },
-  navBar: {
-    borderTopWidth: 2,
+    marginVertical: 5, // Add space between items vertically
+    textAlign: 'center', // Center the text horizontally
+  },
+  footerRow: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-  },
-  navItem: {
-    alignItems: 'center',
-    paddingTop: 15,
-  },
-  textContainer: {
-    marginLeft: 15,
+    width: '100%', // Use the full width of the footer
   },
   itemContainer: {
     flexDirection: 'row',
@@ -298,26 +253,26 @@ itemImage: {
     overflow: 'visible',
 },
 // Rarity styles
-Mundane: {
-    color: 'white', // White theme for Mundane
+Mmundane: {
+  color: 'white', // White theme for Mundane
 },
-Uncommon: {
-    color: 'green', // Green theme for Uncommon
+uncommon: {
+  color: 'green', // Green theme for Uncommon
 },
-Rare: {
-    color: 'blue', // Blue theme for Rare
+rare: {
+  color: 'blue', // Blue theme for Rare
 },
-Exotic: {
-    color: 'gold', // Yellow or gold for Exotic
+exotic: {
+  color: 'gold', // Gold theme for Exotic
 },
-Mythic: {
-    color: 'red', // Red for Mythic
+mythic: {
+  color: 'red', // Red theme for Mythic
 },
-Arcane: {
-    color: 'purple', // Creative liberty - purple for Arcane
+arcane: {
+  color: 'purple', // Purple theme for Arcane
 },
-Celestial: {
-    color: 'cyan', // Hint towards celestial - cyan or light blue
+celestial: {
+  color: 'cyan', // Cyan for Celestial, you can also use backgroundColor here for glittering effect
 },
 searchBar: {
   backgroundColor: '#fff',

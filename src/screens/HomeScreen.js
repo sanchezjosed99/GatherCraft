@@ -8,16 +8,10 @@ const HomeScreen = () => {
         <SafeAreaView style={styles.container}>
         <StatusBar barStyle='light-content' />
         <ScrollView contentContainerStyle={styles.contentContainer}>
-          <View style={styles.header}>
-            <Text style={styles.headerTitle}>Home</Text>
-          </View>
+            <Text style={styles.header}>Home</Text>
           <View style={styles.profileSection}>
             <Text style={styles.profileTitle}>Sunny Meadows</Text>
             <Text style={styles.profileSubtitle}>Lvl. 21 Tier II</Text>
-            <View style={styles.progressBarContainer}>
-              <View style={styles.progressBar(194 / 594)} />
-            </View>
-            <Text style={styles.capacity}>Total Capacity 194/594</Text>
           </View>
           <TouchableOpacity style={styles.menuOption}>
             <FontAwesome name="shopping-bag" size={24} color="black" />
@@ -52,57 +46,40 @@ const HomeScreen = () => {
           </TouchableOpacity>
         </ScrollView>
         <View style={styles.footer}>
-          <Text style={styles.inactiveMessage}>You're currently inactive, start a skill</Text>
-          <View style={styles.navBar}>
-            <TouchableOpacity style={styles.navItem}>
-              <FontAwesome name="home" size={24} color="#fff" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.navItem}>
-              <MaterialIcons name="backpack" size={24} color="grey" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.navItem}>
-              <FontAwesome name="shopping-cart" size={24} color="grey" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.navItem}>
-              <MaterialIcons name="list-alt" size={24} color="grey" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.navItem}>
-              <MaterialIcons name="more-horiz" size={24} color="grey" />
-            </TouchableOpacity>
-          </View>
-        </View>
+  <Text style={styles.footerText}>Currently Inactive</Text>
+  <View style={styles.footerRow}>
+    <Text style={styles.footerText}>Inventory: 59/120</Text>
+    <Text style={styles.footerText}>Gold: 164</Text>
+  </View>
+</View>
       </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#000', // Adjust based on your theme colors
+      backgroundColor: '#373737',
     },
     contentContainer: {
       flexGrow: 1,
     },
     header: {
-      height: 50,
-      backgroundColor: '#000',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    headerTitle: {
-      color: '#fff',
-      fontSize: 20,
+      fontSize: 22,
       fontWeight: 'bold',
+      color: '#FFFFFF',
+      paddingVertical: 1,
+      textAlign: 'center',
+      backgroundColor: '#373737',
     },
     profileSection: {
-      backgroundColor: '#1c1c1e',
+      backgroundColor: '#303030',
       padding: 20,
       alignItems: 'center',
-    },
-    avatar: {
-      width: 60,
-      height: 60,
+      marginVertical: 4,
+      padding: 20,
       borderRadius: 30,
-      marginBottom: 10,
+      marginLeft: 10,
+      marginRight: 10,
     },
     profileTitle: {
       fontSize: 18,
@@ -113,19 +90,6 @@ const styles = StyleSheet.create({
       fontSize: 16,
       color: '#fff',
     },
-    progressBarContainer: {
-      height: 20,
-      width: '100%',
-      backgroundColor: '#3e3e40',
-      borderRadius: 10,
-      marginTop: 10,
-    },
-    progressBar: (percentage) => ({
-      height: '100%',
-      width: `${percentage * 100}%`,
-      backgroundColor: 'green',
-      borderRadius: 10,
-    }),
     capacity: {
       marginTop: 5,
       color: '#fff',
@@ -133,9 +97,12 @@ const styles = StyleSheet.create({
     menuOption: {
       flexDirection: 'row',
       alignItems: 'center',
-      backgroundColor: '#2c2c2e',
-      marginVertical: 8,
+      backgroundColor: '#303030',
+      marginVertical: 4,
       padding: 20,
+      borderRadius: 30,
+      marginLeft: 10,
+      marginRight: 10,
     },
     menuText: {
       marginLeft: 10,
@@ -149,20 +116,26 @@ const styles = StyleSheet.create({
       color: '#999',
     },
     footer: {
+      backgroundColor: '#303030',
       padding: 10,
-      backgroundColor: '#1c1c1e',
+      borderTopWidth: 0.5,
+      borderColor: '#000',
+      alignItems: 'center', // Center align items
+      justifyContent: 'center', // Center items vertically
+      position: 'absolute', // Make sure it's at the bottom
+      left: 0,
+      right: 0,
+      bottom: 0,
     },
-    inactiveMessage: {
+    footerText: {
       color: '#fff',
-      textAlign: 'center',
-      marginBottom: 10,
+      marginVertical: 5, // Add space between items vertically
+      textAlign: 'center', // Center the text horizontally
     },
-    navBar: {
+    footerRow: {
       flexDirection: 'row',
       justifyContent: 'space-around',
-    },
-    navItem: {
-      alignItems: 'center',
+      width: '100%', // Use the full width of the footer
     },
     textContainer: {
       marginLeft: 10,

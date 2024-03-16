@@ -1,8 +1,8 @@
 
 
 const itemImages = {
-    'AuroraHeart': require('./assets/auroraHeart.png'),
-    'AuroraStone': require('./assets/auroraStone.png'),
+//    'AuroraHeart': require('./assets/auroraHeart.png'),
+//    'AuroraStone': require('./assets/auroraStone.png'),
 //    'Blaze Pedal': require('./assets/blazePedal.png'),
 //    'Moon Crystal': require('./assets/cometGem.png'),
 //    'Comet Shard': require('./assets/cometShard.png'),
