@@ -7,14 +7,25 @@ import { themeColor, useTheme } from "react-native-rapi-ui";
 import TabBarIcon from "../components/utils/TabBarIcon";
 import TabBarText from "../components/utils/TabBarText";
 
-import HomeScreen from "../screens/HomeScreen";
-import InventoryScreen from "../screens/InventoryScreen";
-import MarketScreen from "../screens/MarketScreen";
-import TaskScreen from "../screens/TaskScreen";
-import SettingScreen from "../screens/SettingScreen";
-import SecondScreen from "../screens/SecondScreen";
+import HomeScreen from '../screens/tabs/HomeScreen';
+import InventoryScreen from "../screens/tabs/InventoryScreen";
+import MarketScreen from "../screens/tabs/MarketScreen";
+import TaskScreen from "../screens/tabs/TaskScreen";
+import SettingScreen from "../screens/tabs/SettingScreen";
+
+import GatheringScreen from '../screens/homeButtons/GatheringScreen';
+import CraftingScreen from '../screens/homeButtons/CrafingScreen';
+import VendorScreen from '../screens/homeButtons/VendorScreen';
+import WorldMapScreen from "../screens/homeButtons/WorldMapScreen";
+import MiningScreen from '../screens/homeButtons/MiningScreen';
+import HarvestingScreen from "../screens/homeButtons/HarvestingScreen";
+import LoggingScreen from '../screens/homeButtons/LoggingScreen';
+import SkinningScreen from "../screens/homeButtons/SkinnningScreen";
+
 
 const MainStack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
 const Main = () => {
   return (
     <MainStack.Navigator
@@ -23,15 +34,21 @@ const Main = () => {
       }}
     >
       <MainStack.Screen name="MainTabs" component={MainTabs} />
-      <MainStack.Screen name="SecondScreen" component={SecondScreen} />
+      <MainStack.Screen name="Gathering" component={GatheringScreen} />
+      <MainStack.Screen name="Crafting" component={CraftingScreen} />
+      <MainStack.Screen name="Vendors" component={VendorScreen} />
+      <MainStack.Screen name="WorldMap" component={WorldMapScreen} />
+      <MainStack.Screen name="Harvesting" component={HarvestingScreen} />
+      <MainStack.Screen name="Logging" component={LoggingScreen} />
+      <MainStack.Screen name="Mining" component={MiningScreen} />
+      <MainStack.Screen name="Skinning" component={SkinningScreen} />
     </MainStack.Navigator>
   );
 };
 
-const Tabs = createBottomTabNavigator();
 const MainTabs = () => {
   return (
-    <Tabs.Navigator
+    <Tab.Navigator
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
@@ -42,7 +59,7 @@ const MainTabs = () => {
         tabBarInactiveTintColor: "#ffffff", // Lighter color for inactive tab icon and label
       }}
     >
-      <Tabs.Screen
+      <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
@@ -54,7 +71,7 @@ const MainTabs = () => {
           ),
         }}
       />
-      <Tabs.Screen
+      <Tab.Screen
         name="Inventory"
         component={InventoryScreen}
         options={{
@@ -66,7 +83,7 @@ const MainTabs = () => {
           ),
         }}
       />
-      <Tabs.Screen
+      <Tab.Screen
         name="Market"
         component={MarketScreen}
         options={{
@@ -78,7 +95,7 @@ const MainTabs = () => {
           ),
         }}
       />
-      <Tabs.Screen
+      <Tab.Screen
         name="Task"
         component={TaskScreen}
         options={{
@@ -90,7 +107,7 @@ const MainTabs = () => {
           ),
         }}
       />
-      <Tabs.Screen
+      <Tab.Screen
         name="Setting"
         component={SettingScreen}
         options={{
@@ -102,7 +119,7 @@ const MainTabs = () => {
           ),
         }}
       />
-    </Tabs.Navigator>
+    </Tab.Navigator>
   );
 };
 

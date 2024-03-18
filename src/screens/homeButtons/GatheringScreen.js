@@ -3,47 +3,48 @@ import { StyleSheet, View, Text, Image, TouchableOpacity, StatusBar, SafeAreaVie
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons'; // Ensure you have expo/vector-icons installed
 
 
-const HomeScreen = () => {
+function GatheringScreen({ navigation }) {
     return (
         <SafeAreaView style={styles.container}>
+          <Text style={styles.header}>Gathering</Text>
         <StatusBar barStyle='light-content' />
         <ScrollView contentContainerStyle={styles.contentContainer}>
-            <Text style={styles.header}>Home</Text>
-          <View style={styles.profileSection}>
-            <Text style={styles.profileTitle}>Sunny Meadows</Text>
-            <Text style={styles.profileSubtitle}>Lvl. 21 Tier II</Text>
-          </View>
-          <TouchableOpacity style={styles.menuOption}>
-            <FontAwesome name="shopping-bag" size={24} color="black" />
+        <View style={styles.profileSection}>
+              <Text style={styles.profileTitle}>Sunny Meadows</Text>
+              <Text style={styles.profileSubtitle}>Lvl. 21 Tier II</Text>
+            </View>
+        <View style={styles.textContainer}>
+            <TouchableOpacity style={styles.menuOption} onPress={() => navigation.navigate('Mining')}>
+          <FontAwesome name="shopping-bag" size={24} color="black" />
             <View style={styles.textContainer}>
-              <Text style={styles.menuText}>Gathering</Text>
-              <Text style={styles.menuSubtext}>Gather Raw Materials</Text>
+              <Text style={styles.menuText}>Mining</Text>
             </View>
           </TouchableOpacity>
-
-          <TouchableOpacity style={styles.menuOption}>
-            <MaterialIcons name="build" size={24} color="black" />
+        </View>
+        <View>
+        <TouchableOpacity style={styles.menuOption} onPress={() => navigation.navigate('Harvesting')}>
+          <FontAwesome name="shopping-bag" size={24} color="black" />
             <View style={styles.textContainer}>
-              <Text style={styles.menuText}>Crafting</Text>
-              <Text style={styles.menuSubtext}>Craft Items & Refine Materials</Text>
+              <Text style={styles.menuText}>Harvesting</Text>
             </View>
           </TouchableOpacity>
-
-          <TouchableOpacity style={styles.menuOption}>
-            <FontAwesome name="money" size={24} color="black" />
+        </View>
+        <View>
+        <TouchableOpacity style={styles.menuOption} onPress={() => navigation.navigate('Skinning')}>
+          <FontAwesome name="shopping-bag" size={24} color="black" />
             <View style={styles.textContainer}>
-              <Text style={styles.menuText}>Vendors</Text>
-              <Text style={styles.menuSubtext}>Buy Items & Materials</Text>
+              <Text style={styles.menuText}>Skinning</Text>
             </View>
           </TouchableOpacity>
-
-          <TouchableOpacity style={styles.menuOption}>
-            <FontAwesome name="map-o" size={24} color="black" />
+        </View>
+        <View>
+        <TouchableOpacity style={styles.menuOption} onPress={() => navigation.navigate('Logging')}>
+          <FontAwesome name="shopping-bag" size={24} color="black" />
             <View style={styles.textContainer}>
-              <Text style={styles.menuText}>World Map</Text>
-              <Text style={styles.menuSubtext}>Travel Between Locations</Text>
+              <Text style={styles.menuText}>Logging</Text>
             </View>
           </TouchableOpacity>
+        </View>
         </ScrollView>
         <View style={styles.footer}>
   <Text style={styles.footerText}>Currently Inactive</Text>
@@ -142,4 +143,4 @@ const styles = StyleSheet.create({
     },
   });
 
-  export default HomeScreen;
+  export default GatheringScreen;

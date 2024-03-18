@@ -4,7 +4,7 @@ import {
   Image, StatusBar, SafeAreaView, FlatList, TextInput
 } from 'react-native';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
-import gameItems from '../components/gameItems'; // Ensure this component is correctly imported
+
 
 function InventoryScreen() {
     const [selectedItem, setSelectedItem] = useState(null);
